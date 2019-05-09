@@ -9,13 +9,19 @@ export default class Main extends Component {
         newBox: '',
     };
 
-    handleSubmit = () => {
+    handleSubmit = async e => {
+        e.preventDefault();
 
-    }
+        const response = await api.post('boxes', {
+            title: this.state.newBox,
+        });
 
-    handleInputChange = () => {
+        this.props.history.push(`/box/${response.data._id}`);
+    };
 
-    }
+    handleInputChange = (e) => {
+        this.setState({ newBox: e.target.value });
+    };
 
     render() {
         return (
